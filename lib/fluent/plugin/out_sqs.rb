@@ -70,6 +70,8 @@ module Fluent::Plugin
     end
 
     def format(tag, time, record)
+      log.warn 'Could not push message to SQS, payload exceeds format test '
+      log.warn 'Could not push message to SQS, payload exceeds format ' \ "#{record}"
       record[@tag_property_name] = tag if @include_tag
       record = inject_values_to_record(tag, time, record)
 
